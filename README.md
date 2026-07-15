@@ -20,7 +20,6 @@ This project demonstrates backend API development, database integration, rate li
 
 <p align="center">
   <img src="images/jaeger-tracing.png" alt="Jaeger Trace" width="48%">
-  <img src="images/grafana-jaeger-parallel.png" alt="Grafana and Jaeger Together" width="48%">
 </p>
 
 <p align="center">
@@ -253,14 +252,21 @@ Each trace shows:
 ---
 
 ## Correlating Metrics and Traces
+To demonstrate how monitoring helps identify bottlenecks, I intentionally introduced a 
+`time.sleep(0.5)` delay in the `/shorten` endpoint to simulate a slow database query.
 
-During development, I intentionally introduced a `time.sleep(0.5)` delay to simulate a slow database query.
+**Before (with artificial delay):**
+![Grafana - Slow Performance](./images/grafana-slow.png)
 
-The resulting latency spike immediately appeared in Grafana while the corresponding request trace in Jaeger clearly highlighted the additional delay. This demonstrates how metrics and distributed tracing complement each other when diagnosing performance bottlenecks.
+The p95 latency for `/shorten` jumped to ~700ms, clearly visible in the Grafana dashboard.
 
-<p align="center">
-  <img src="images/grafana-jaeger-parallel.png" width="85%">
-</p>
+**After (removed the delay):**
+![Grafana - Fast Performance](./images/grafana-fast.png)
+
+After removing the delay, latency dropped back to ~23ms. This "find it → fix it → prove it" 
+workflow demonstrates how metrics and distributed tracing complement each other when 
+diagnosing performance bottlenecks in production systems.
+
 
 ---
 
