@@ -69,11 +69,6 @@ url-shortener/
 │   └── test_api.py
 │
 ├── images/
-│   ├── grafana-1m.png
-│   ├── grafana-5m.png
-│   ├── jaeger-tracing.png
-│   └── grafana-jaeger-parallel.png
-│
 ├── docker-compose.yml
 ├── prometheus.yml
 ├── requirements.txt
